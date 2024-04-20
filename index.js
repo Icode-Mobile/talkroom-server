@@ -21,6 +21,8 @@ io.on('connection', (socket) => {
   socket.on('join room', (room) => {
     socket.join(room);
 
+    console.log(room);
+
     const userRoom = users.find((user) => user.room == room);
     if (userRoom) {
       userRoom.socket_id = socket.id;
@@ -39,6 +41,7 @@ io.on('connection', (socket) => {
       text: message,
       author,
     };
+    console.log(message, author);
     messages.push(msg);
     io.to(room).emit('message', msg);
   });
